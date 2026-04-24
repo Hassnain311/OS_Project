@@ -88,6 +88,17 @@ void print(){
 
 }
 
+void log_state(int safe,int sequence[]){
+  char buffer[500];
+  int fd=open("logs.txt",O_WRONLY | O_APPEND | O_CREAT,0644);
+  if(fd==-1){
+    printf("Error during opening file!\n");
+    return;
+  }
+  
+  close(fd);
+}
+
 int main(){
 input();
 print();
