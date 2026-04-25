@@ -15,29 +15,31 @@ int need[max_process][max_resource];
 void input(){
   printf("Enter Number of Processes: ");
   scanf("%d",&n);
+  printf("\n");
   printf("Enter the number of each types of resources: ");
   scanf("%d",&m);
-  printf("Enter Available matrix:\n");
+  printf("\n");
+  printf("Enter Available resources:\n");
   for(int i=0;i<m;i++){
     scanf("%d",&available_resource[i]);
   }
-  
-  printf("Enter Maximum matrix:\n");
+  printf("\n");
+  printf("Enter Maximum resources wants:\n");
   for(int i=0;i<n;i++){
     printf("Process %d: ", i);
     for(int j=0;j<m;j++){
       scanf("%d",&maximum[i][j]);
     }
   }
-  
-  printf("Enter Allocated matrix:\n");
+  printf("\n");
+  printf("Enter Allocated resources for each process:\n");
   for(int i=0;i<n;i++){
     printf("Process %d: ", i);
     for(int j=0;j<m;j++){
         scanf("%d",&allocated[i][j]);
     }
 }
-  
+  printf("\n");
   for(int i=0;i<n;i++){
     for(int j=0;j<m;j++){
       need[i][j]=maximum[i][j]-allocated[i][j];
@@ -52,14 +54,17 @@ void input(){
 
 
 void print(){
-  printf("Available: ");
+  printf("\n");
+  printf("Available resources: \n");
   for(int i=0;i<m;i++){
   printf("R%d: ", i); 
     printf("%d ",available_resource[i]);
+    printf("\n");
   }
+  
   printf("\n");
   
-  printf("Maximum Matrix:\n");
+  printf("Maximum resources wants:\n");
   for(int i=0;i<n;i++){
   printf("P%d: ", i); 
     for(int j=0;j<m;j++){
@@ -67,8 +72,8 @@ void print(){
     }
     printf("\n");
   }
-  
-  printf("Allocation Matrix:\n");
+  printf("\n");
+  printf("Allocated resources:\n");
   for (int i=0;i<n;i++){
   printf("P%d: ", i); 
     for(int j=0;j<m;j++){
@@ -76,8 +81,8 @@ void print(){
     }  
     printf("\n");
   }
-  
-  printf("Need Matrix:\n");
+  printf("\n");
+  printf("remaining needed resources:\n");
   for(int i=0;i<n;i++){
    printf("P%d: ", i); 
     for(int j=0;j<m;j++){
@@ -85,7 +90,7 @@ void print(){
     }
     printf("\n");
   }
-
+  printf("\n");
 }
 
 void log_state(int safe,int sequence[]){
