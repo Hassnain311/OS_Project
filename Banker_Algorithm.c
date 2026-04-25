@@ -99,6 +99,15 @@ void log_state(int safe,int sequence[]){
   close(fd);
 }
 
+int safety_algorithm(int safe_sequence[]){
+  int work[max_resource];
+  bool finish[max_process];
+  int count = 0;
+  
+  //will continue after working on db project...
+  return 0;
+}
+
 int main(){
 input();
 print();
