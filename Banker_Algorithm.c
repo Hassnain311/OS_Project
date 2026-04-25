@@ -108,6 +108,28 @@ int safety_algorithm(int safe_sequence[]){
   return 0;
 }
 
+void request_resource(int pid,int request[]){
+  printf("P%d requested for more resources\n",pid);
+  printf("Need resources of each type:\n");
+  for(int i=0;i<m;i++){
+    printf("%d ",request[i]);
+  }
+  printf("\n");
+  for(int i=0;i<m;i++){
+    if(request[i]>need[pid][i]){
+      printf("Error! P%d lied about resources.\n",pid);
+      return;
+    }
+  }
+  
+  for(int i=0;i<m;i++){
+    if(request[i]>available_resource[i]){
+      printf("P%d have to wait for resources!\n",pid);
+      return;
+    }
+  }
+}
+
 int main(){
 input();
 print();
