@@ -105,12 +105,47 @@ void log_state(int safe,int sequence[]){
 }
 
 int safety_algorithm(int safe_sequence[]){
+  printf("\n");
   int work[max_resource];
   bool finish[max_process];
-  int count = 0;
+  int count=0;
+  for(int i=0;i<m;i++){
+    work[i]=available_resource[i];
+  }
   
-  //will continue after working on db project...
-  return 0;
+  for(int i=0;i<n;i++){
+    finish[i]=false;
+  }
+
+  while(count<n){
+    bool found=false;
+    for(int i=0;i<n;i++){
+      if(finish[i]==false){
+        bool run=true;
+        for(int j=0;j<m;j++){
+          if(need[i][j]>work[j]){
+            run=false;
+            break;
+          }
+        }
+        if(run){
+          for(int j=0;j<m;j++){
+            work[j]+=allocated[i][j];
+          }
+          finish[i]=true;
+          safe_sequence[count]=i;
+          found=true;
+          count++;
+          break;
+        }
+      }
+    }
+    if(found==false){
+      return 0;
+    }
+}
+	printf("\n");
+	return 1;
 }
 
 void request_resource(int pid,int request[]){
