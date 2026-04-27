@@ -100,6 +100,20 @@ void log_state(int safe,int sequence[]){
     printf("Error during opening file!\n");
     return;
   }
+	if(safe==1){
+    snprintf(buffer,sizeof(buffer),"State: Safe\n Sequence: ");
+    write(fd,buffer,strlen(buffer));
+    for(int i=0;i<n;i++){
+      snprintf(buffer,sizeof(buffer),"P%d",sequence[i]);
+      write(fd,buffer,strlen(buffer));
+      if(i<n-1){
+        snprintf(buffer,sizeof(buffer),"->");
+        write(fd,buffer,strlen(buffer));
+      }
+    }
+    snprintf(buffer,sizeof(buffer),"\n");
+    write(fd,buffer,strlen(buffer));
+  }
   
   close(fd);
 }
