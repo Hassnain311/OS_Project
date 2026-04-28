@@ -1,11 +1,18 @@
 #include<stdio.h>
 #include<stdbool.h>
+#include<unistd.h>
+#include<fcntl.h>
+#include<string.h>
 
 #define max_resource 50
 #define max_process 50
 
 int n;
 int m;
+int total_request=0;
+int grant_request=0;
+int deny_request=0;
+double t_time=0.0;
 int available_resource[max_resource];
 int maximum[max_process][max_resource];
 int allocated[max_process][max_resource];
@@ -113,7 +120,12 @@ void log_state(int safe,int sequence[]){
     }
     snprintf(buffer,sizeof(buffer),"\n");
     write(fd,buffer,strlen(buffer));
+  }else{
+    snprintf(buffer,sizeof(buffer),"State: Unsafe\n");
+    write(fd,buffer,strlen(buffer));
   }
+  snprintf(buffer,sizeof(buffer),"---\n");
+  write(fd,buffer,strlen(buffer));
   
   close(fd);
 }
