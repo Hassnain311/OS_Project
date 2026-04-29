@@ -194,6 +194,45 @@ void request_resource(int pid,int request[]){
       return;
     }
   }
+  
+  for(int j=0;j<m;j++){
+    available_resource[j]-=request[j];
+    allocated[pid][j]+=request[j];
+    need[pid][j]-=request[j];
+  }
+  
+  clock_t start=clock();
+  int sequence[max_process];
+  int result=safety_algorithm(sequence);
+
+  clock_t end=clock();
+  t_time+=((double)(end-start))/CLOCKS_PER_SEC;
+
+  if(result==1){
+    grant_request++;
+    printf("request is fullfilled\n");
+    log_state(1,sequence);
+    printf("Sequence: ");
+    for(int i=0;i<n;i++){
+      printf("P%d ",sequence[i]);
+      if(i<n-1){
+        printf(" -> ");
+      }
+    }
+    printf("\n"); 
+  }else{
+    deny_request++;
+    for(int i=0;i<m;i++){
+      available_resource[i]+=request[i];
+      allocated[pid][i]-=request[i];
+      need[pid][i]+=request[i];
+    }
+    printf("request denied!\n");
+    int empty[max_process];
+    log_state(0,empty);
+    printf("Not a Safe State\n");
+  }
+  printf("\n");
 }
 
 int main(){
