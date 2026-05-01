@@ -128,6 +128,21 @@ void log_state(int safe,int sequence[]){
   write(fd,buffer,strlen(buffer));
   
   close(fd);
+  print("\n");
+}
+
+void performance_report(){
+  printf("\n");
+  printf("Total requests: %d\n",total_request);
+  printf("Granted requests: %d\n",grant_request);
+  printf("Denied requests: %d\n",deny_request);
+  if(total_request>0){
+    printf("total time: %f seconds\n",t_time);
+    printf("Average per check: %f seconds\n",t_time/total_request);
+  }else{
+    printf("No requests made yet\n");
+  }
+  printf("\n");
 }
 
 int safety_algorithm(int safe_sequence[]){
