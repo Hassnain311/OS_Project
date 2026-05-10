@@ -133,50 +133,7 @@ void log_state(int safe,int sequence[]){
   print("\n");
 }
 
-void performance_report(){
-  printf("\n");
-  printf("Total requests: %d\n",total_request);
-  printf("Granted requests: %d\n",grant_request);
-  printf("Denied requests: %d\n",deny_request);
-  if(total_request>0){
-    printf("total time: %f seconds\n",t_time);
-    printf("Average per check: %f seconds\n",t_time/total_request);
-  }else{
-    printf("No requests made yet\n");
-  }
-  printf("\n");
-}
-void random_request(){
-  printf("\n");
-  int eligible[max_process];
-  int count=0;
-  for(int i=0;i<n;i++){
-    for(int j=0;j<m;j++){
-      if(need[i][j]>0){
-        eligible[count]=i;
-        count++;
-        break;
-      }
-    }
-  }
-  if(count==0){
-    printf("All processes are done!");
-    return;
-  }
-  int pid=eligible[rand()%count];
-  int request[max_resource];
-  for(int j=0;j<m;j++){
-    request[j]=rand()%(need[pid][j]+1);
-  }
-  
-  printf("Random request for p%d: ",pid);
-  for(int i=0;i<m;i++){
-    printf("%d ",request[i]);
-  }
-  printf("\n");
-  request_resource(pid,request);
-  printf("\n");
-}
+
 
 int safety_algorithm(int safe_sequence[]){
   printf("\n");
@@ -280,6 +237,52 @@ void request_resource(int pid,int request[]){
     log_state(0,empty);
     printf("Not a Safe State\n");
   }
+  printf("\n");
+}
+
+void performance_report(){
+  printf("\n");
+  printf("Total requests: %d\n",total_request);
+  printf("Granted requests: %d\n",grant_request);
+  printf("Denied requests: %d\n",deny_request);
+  if(total_request>0){
+    printf("total time: %f seconds\n",t_time);
+    printf("Average per check: %f seconds\n",t_time/total_request);
+  }else{
+    printf("No requests made yet\n");
+  }
+  printf("\n");
+}
+
+void random_request(){
+  printf("\n");
+  int eligible[max_process];
+  int count=0;
+  for(int i=0;i<n;i++){
+    for(int j=0;j<m;j++){
+      if(need[i][j]>0){
+        eligible[count]=i;
+        count++;
+        break;
+      }
+    }
+  }
+  if(count==0){
+    printf("All processes are done!");
+    return;
+  }
+  int pid=eligible[rand()%count];
+  int request[max_resource];
+  for(int j=0;j<m;j++){
+    request[j]=rand()%(need[pid][j]+1);
+  }
+  
+  printf("Random request for p%d: ",pid);
+  for(int i=0;i<m;i++){
+    printf("%d ",request[i]);
+  }
+  printf("\n");
+  request_resource(pid,request);
   printf("\n");
 }
 
