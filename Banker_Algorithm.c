@@ -407,5 +407,60 @@ printf("\n");
 input();
 print();
 
+int sequence[max_process];
+if(safety_algorithm(sequence)==1){
+  printf("\n");
+  printf("System's initial state is in Safe State.\n");
+  printf("Sequence: ");
+  for(int i=0;i<n;i++){
+    printf("P%d",sequence[i]);
+    if(i<n-1){
+      printf("->");
+    }
+  }
+  printf("\n");
+  log_state(1,sequence);
+}else{
+  printf("Not safe state!\n");
+  int empty[max_process];
+  log_state(0,empty);
+}
+printf("\n");
+printf("\n");
+int ch;
+while(1){
+  printf("------------------------\n");
+  printf("|  Banker's Algorithm  |\n");
+  printf("------------------------\n");
+  printf("\n");
+  printf("\n");
+  printf("1.Request resources:\n");
+  printf("2.Print current State:\n");
+  printf("3.check Safety:\n");
+  printf("4.Generate Random Request for Resources:\n");
+  printf("5.Rollback simulation:\n");
+  printf("6.Generate Performance Report:\n");
+  printf("7.Exit\n");
+  printf("\n");
+  printf("Enter Choice: ");
+  scanf("%d",&ch);
+  switch(ch){
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+   
+    case 5:
+    case 6:
+     
+    case 7:
+    exit(1);
+    default:
+      printf("Invalid choice! Try Again\n");
+  }
+  printf("\n");
+  printf("\n");
+}
+
 return 0;
 }
