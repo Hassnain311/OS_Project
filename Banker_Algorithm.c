@@ -3,6 +3,8 @@
 #include<unistd.h>
 #include<fcntl.h>
 #include<string.h>
+#include<time.h>
+#include<stdlib.h>
 
 #define max_resource 50
 #define max_process 50
