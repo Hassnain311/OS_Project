@@ -284,6 +284,12 @@ void request_resource(int pid,int request[]){
 }
 
 int main(){
+srand(time(NULL));
+printf("------------------------\n");
+printf("|  Banker's Algorithm  |\n");
+printf("------------------------\n");
+printf("\n");
+printf("\n");
 input();
 print();
 
