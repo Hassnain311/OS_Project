@@ -286,6 +286,117 @@ void random_request(){
   printf("\n");
 }
 
+void rollback(int pid,int request[]){
+  for(int j=0;j<m;j++){
+        if(request[j] > need[pid][j]){
+            printf("Error! Request exceeds need for R%d\n", j);
+            return;
+        }
+  }
+  for(int j=0;j<m;j++){
+      if(request[j] > available_resource[j]){
+          printf("Error! Request exceeds available for R%d\n", j);
+          return;
+      }
+  }
+  printf("State before request:\n");
+  printf("Available resource:\n");
+  for(int j=0;j<m;j++){
+    printf("R%d ",j);
+    printf("%d ",available_resource[j]);
+  }
+  printf("\n");
+  printf("P%d Allocated: ",pid);
+  for(int j=0;j<m;j++){
+    printf("%d ",allocated[pid][j]);
+  }
+  printf("\n");
+  printf("P%d Need: ",pid);
+  for(int j=0;j<m;j++){
+    printf("%d ",need[pid][j]);
+  }
+  printf("\n");
+  
+  
+  int backup_available[max_resource];
+  int backup_allocated[max_resource];
+  int backup_need[max_resource];
+  for(int j=0;j<m;j++){
+    backup_available[j]=available_resource[j];
+    backup_allocated[j]=allocated[pid][j];
+    backup_need[j]=need[pid][j];
+  }
+  
+  for(int j=0;j<m;j++){
+    available_resource[j]-=request[j];
+    allocated[pid][j]+=request[j];
+    need[pid][j]-=request[j];
+  }
+  
+  printf("Available resource:\n");
+  for(int j=0;j<m;j++){
+    printf("R%d ",j);
+    printf("%d ",available_resource[j]);
+  }
+  printf("\n");
+  
+  printf("P%d Allocated: ",pid);
+  for(int j=0;j<m;j++){
+    printf("%d ",allocated[pid][j]);
+  }
+  printf("\n");
+  printf("P%d Need: ",pid);
+  for(int j=0;j<m;j++){
+    printf("%d ",need[pid][j]);
+  }
+  printf("\n");
+  
+  int sequence[max_process];
+  if(safety_algorithm(sequence)==1){
+    printf("SAFE! Request granted.\n");
+    printf("Sequence: ");
+    for(int i=0;i<n;i++){
+      printf("P%d",sequence[i]);
+      if(i<n-1){
+        printf(" -> ");
+      }
+    }
+    printf("\n");
+        log_state(1,sequence);
+  }else{
+    printf("Unsafe.Rolling Back resources!\n");
+    for(int j=0;j<m;j++){
+      available_resource[j]=backup_available[j];
+      allocated[pid][j]=backup_allocated[j];
+      need[pid][j]=backup_need[j];
+    }
+    
+    printf("\n");
+    printf("State After rolling back all the resources!\n");
+    printf("Available resource:\n");
+    for(int j=0;j<m;j++){
+      printf("R%d ",j);
+      printf("%d ",available_resource[j]);
+    }
+    printf("\n");
+  
+    printf("P%d Allocated: ",pid);
+    for(int j=0;j<m;j++){
+      printf("%d ",allocated[pid][j]);
+    }
+    printf("\n");
+    printf("P%d Need: ",pid);
+    for(int j=0;j<m;j++){
+      printf("%d ",need[pid][j]);
+    }
+    printf("\n");
+    printf("State Restored!\n");
+    int empty[max_process];
+    log_state(0,empty);
+  }
+  
+}
+
 int main(){
 srand(time(NULL));
 printf("------------------------\n");
