@@ -489,7 +489,19 @@ while(1){
       printf("\n");
     break;
    
-    case 5:
+    case 5:{
+      int pid;
+      int request[max_resource];
+      printf("Enter PID: ");
+      scanf("%d",&pid);
+      printf("Enter request: ");
+      for(int i=0;i<m;i++){
+        scanf("%d",&request[i]);
+      }
+      rollback(pid,request);
+      printf("\n");
+    break;
+    }
     case 6:
       performance_report();
       printf("\n");
