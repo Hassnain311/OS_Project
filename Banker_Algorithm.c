@@ -485,9 +485,15 @@ while(1){
     break;
     }
     case 4:
+      random_request();
+      printf("\n");
+    break;
    
     case 5:
     case 6:
+      performance_report();
+      printf("\n");
+    break;
      
     case 7:
     exit(1);
