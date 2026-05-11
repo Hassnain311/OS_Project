@@ -445,8 +445,23 @@ while(1){
   printf("Enter Choice: ");
   scanf("%d",&ch);
   switch(ch){
-    case 1:
+    case 1:{
+      int pid;
+      int request[max_resource];
+      printf("Enter Process ID: ");
+      scanf("%d",&pid);
+      printf("\n");
+      printf("Enter requested resources:\n");
+      for(int i=0;i<m;i++){
+        scanf("%d",&request[i]);
+      }
+      request_resource(pid,request);
+      break;
+    }
     case 2:
+	  print();
+      printf("\n");
+    break;
     case 3:
     case 4:
    
