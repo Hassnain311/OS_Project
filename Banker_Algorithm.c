@@ -462,7 +462,28 @@ while(1){
 	  print();
       printf("\n");
     break;
-    case 3:
+    case 3:{
+      int sequence[max_process];
+      if(safety_algorithm(sequence)==1){
+      printf("\n");
+      printf("Current state is in Safe State.\n");
+      printf("Sequence: ");
+      for(int i=0;i<n;i++){
+        printf("P%d",sequence[i]);
+        if(i<n-1){
+          printf("->");
+        }
+      }
+      printf("\n");
+      log_state(1,sequence);
+      }else{
+        printf("Not safe state!\n");
+        int empty[max_process];
+        log_state(0,empty);
+      } 
+      printf("\n");
+    break;
+    }
     case 4:
    
     case 5:
